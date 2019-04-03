@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="微信,">
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="Java">
-<meta property="og:type" content="website">
-<meta property="og:title" content="苏雨丶">
-<meta property="og:url" content="http://niezhiliang.com/index.html">
+<meta name="description" content="前端实现 这里说一下前后端的思路，页面加载时声明一个变量state=’时间戳+6位随机数’, 前端路径生成二维码，其中有个state参数需要我们传递，这个参数你传什么，微信回调的时候就会给你返回什么。我们用之前生成那个state，当用户点击微信登录的按钮，我们就通过以state值为key和后端进行websocket连接，同时弹出二维码页面。state对前端来说就相当于一个令牌，告诉后端是谁在使用微">
+<meta name="keywords" content="微信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信第三方登录前后端分离实现思路">
+<meta property="og:url" content="http://niezhiliang.com/2019/03/04/weixin-login/index.html">
 <meta property="og:site_name" content="苏雨丶">
-<meta property="og:description" content="Java">
+<meta property="og:description" content="前端实现 这里说一下前后端的思路，页面加载时声明一个变量state=’时间戳+6位随机数’, 前端路径生成二维码，其中有个state参数需要我们传递，这个参数你传什么，微信回调的时候就会给你返回什么。我们用之前生成那个state，当用户点击微信登录的按钮，我们就通过以state值为key和后端进行websocket连接，同时弹出二维码页面。state对前端来说就相当于一个令牌，告诉后端是谁在使用微">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-03T08:29:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="苏雨丶">
-<meta name="twitter:description" content="Java">
+<meta name="twitter:title" content="微信第三方登录前后端分离实现思路">
+<meta name="twitter:description" content="前端实现 这里说一下前后端的思路，页面加载时声明一个变量state=’时间戳+6位随机数’, 前端路径生成二维码，其中有个state参数需要我们传递，这个参数你传什么，微信回调的时候就会给你返回什么。我们用之前生成那个state，当用户点击微信登录的按钮，我们就通过以state值为key和后端进行websocket连接，同时弹出二维码页面。state对前端来说就相当于一个令牌，告诉后端是谁在使用微">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://niezhiliang.com/">
+  <link rel="canonical" href="http://niezhiliang.com/2019/03/04/weixin-login/">
 
 
 
 
 
-  <title>苏雨丶</title>
+  <title>微信第三方登录前后端分离实现思路 | 苏雨丶</title>
   
 
 
@@ -143,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -237,9 +238,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -269,9 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/04/weixin-login/" itemprop="url">微信第三方登录前后端分离实现思路</a></h1>
+          <h1 class="post-title" itemprop="name headline">微信第三方登录前后端分离实现思路</h1>
         
 
         <div class="post-meta">
@@ -364,9 +363,7 @@
       
 
       
-        
-          
-            <h3 id="前端实现"><a href="#前端实现" class="headerlink" title="前端实现"></a>前端实现</h3><blockquote>
+        <h3 id="前端实现"><a href="#前端实现" class="headerlink" title="前端实现"></a>前端实现</h3><blockquote>
 <p>这里说一下前后端的思路，页面加载时声明一个变量<code>state</code>=’时间戳+6位随机数’, 前端路径生成二维码，<br>其中有个<code>state</code>参数需要我们传递，这个参数你传什么，微信回调的时候就会给你返回什么。<br>我们用之前生成那个state，当用户点击微信登录的按钮，我们就通过以state值为key和后端进行websocket连接，同时弹出二维码页面。<br>state对前端来说就相当于一个令牌，告诉后端是谁在使用微信登录。目的在于，当后台收到回调的时候，能准确的把数据返回当前扫码的用户，<br>后台在微信回调的时候能拿到<code>code</code>的值和<code>state</code>的值，通过<code>code</code>去拿<code>access_token</code>和<code>openid</code> ，<br>通过这两个值去请求微信用户最新信息，<br>后端定义好返回的状态值代表啥，无非两种状态码：1.已经绑定:取出<code>user</code>信息，<br>通过websocket返回给前端，2.没绑定:返回微信账户的openid和头像昵称。<br>前端收到后端发送的websocket信息，判断微信绑定状态，如果绑定路由跳转到登录完成页面，如果未绑定，跳转到绑定或注册页面。</p>
 </blockquote>
 <h5 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h5><p>前端先设置好生成二维码的路径，<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.url =</span><br><span class="line">      <span class="string">"https://open.weixin.qq.com/connect/qrconnect?appid="</span> +</span><br><span class="line">      <span class="keyword">this</span>.appid +</span><br><span class="line">      <span class="string">"&amp;redirect_uri="</span> +</span><br><span class="line">      <span class="keyword">this</span>.redirect_uri +</span><br><span class="line">      <span class="string">"&amp;response_type=code&amp;scope=snsapi_login&amp;state="</span> +</span><br><span class="line">      <span class="keyword">this</span>.state +</span><br><span class="line">      <span class="string">"#wechat_redirect"</span>;</span><br></pre></td></tr></table></figure></p>
@@ -411,8 +408,6 @@
 <p>我们公司做的就是前后端分离微信登录，大家可以体验一下</p>
 <p><a href="https://www.fangxinqian.cn/main/login" target="_blank" rel="noopener">https://www.fangxinqian.cn/main/login</a></p>
 
-          
-        
       
     </div>
     
@@ -427,186 +422,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://niezhiliang.com/2019/03/04/no-pwd-ssh/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="niezhiliang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/33079130?s=460&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="苏雨丶">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/04/no-pwd-ssh/" itemprop="url">配置SSH免密登录</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-04T15:47:57+08:00">
-                2019-03-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/微信/" rel="tag"><i class="fa fa-tag"></i> 微信</a>
           
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/04/no-pwd-ssh/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/03/04/no-pwd-ssh/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>作为一个后端开发人员跟服务器打交道是必不可少的，说到打交道，第一步就是跟服务器建立连接嘛。通常的做法就是ssh <a href="mailto:root@xxx.xxx.xxx.xxx" target="_blank" rel="noopener">root@xxx.xxx.xxx.xxx</a>   然后就输入密码就连接成功啦。<br>一次两次这样跟服务器连接还好，要是经常连接，那就有点烦啦。都说人都喜欢偷懒，说到偷懒未必不是一个良好的品质。只有懒人才会想出各种无厘头的解决方式。这些方式往往事半功倍<br>的解决问题。同样这里的<code>SSH</code>不用密码登录服务器也是一种偷懒的方式。</p>
-<h2 id="SSH免密登录"><a href="#SSH免密登录" class="headerlink" title="SSH免密登录"></a>SSH免密登录</h2><h3 id="1-生成密钥对"><a href="#1-生成密钥对" class="headerlink" title="1.生成密钥对"></a>1.生成密钥对</h3><p>我这边系统是Mac的，打开终端输入命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
-<p>输入完代码后，会提示你输入密码啥的，既然是免密我们就不设置密码 一直按回车就好，运行结束以后， 默认在 ~/.ssh目录生成两个文件： id_rsa ：私钥 id_rsa.pub ：公钥</p>
-<h3 id="2-本地机器和服务器操作"><a href="#2-本地机器和服务器操作" class="headerlink" title="2.本地机器和服务器操作"></a>2.本地机器和服务器操作</h3><ul>
-<li>本地机器</li>
-</ul>
-<p>切换到生成的公私钥目录下 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将公钥写入到本地ssh的认证文件里面</span></span><br><span class="line">cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys  </span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span>  ~/.ssh</span><br><span class="line"><span class="comment">#将公私传到服务器根目录，也可以用工具将该文件传到服务器</span></span><br><span class="line">scp id_rsa.pub root@<span class="variable">$&#123;服务器ip&#125;</span>:~</span><br></pre></td></tr></table></figure>
-<ul>
-<li>服务器</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
-<p>退出服务器再试试，看下是不是不需要输入密码就能直接进入系统了</p>
-<h3 id="常见问题及解决方案"><a href="#常见问题及解决方案" class="headerlink" title="常见问题及解决方案"></a>常见问题及解决方案</h3><ul>
-<li>生成密钥并上传至远程主机后，任然不可用</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">打开服务器的 /etc/ssh/sshd_config 这个文件，取消注释。</span><br><span class="line"></span><br><span class="line"><span class="comment">#AuthorizedKeysFile .ssh/authorized_keys</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>重启服务器的ssh服务</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#RHEL/CentOS系统</span></span><br><span class="line"></span><br><span class="line">service sshd restart</span><br><span class="line"></span><br><span class="line"><span class="comment">#ubuntu系统</span></span><br><span class="line"></span><br><span class="line">service ssh restart</span><br><span class="line"></span><br><span class="line"><span class="comment">#debian系统</span></span><br><span class="line"></span><br><span class="line">/etc/init.d/ssh restart</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/04/no-pwd-ssh/" rel="next" title="配置SSH免密登录">
+                <i class="fa fa-chevron-left"></i> 配置SSH免密登录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
       
     </footer>
   </div>
@@ -616,10 +461,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -627,6 +473,16 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div class="ds-thread" data-thread-key="2019/03/04/weixin-login/" data-title="微信第三方登录前后端分离实现思路" data-url="http://niezhiliang.com/2019/03/04/weixin-login/">
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -647,8 +503,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -726,6 +591,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前端实现"><span class="nav-number">1.</span> <span class="nav-text">前端实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一步"><span class="nav-number">1.0.1.</span> <span class="nav-text">第一步</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数解释（这里直解释需要修改的参数）"><span class="nav-number">1.1.</span> <span class="nav-text">参数解释（这里直解释需要修改的参数）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第二步"><span class="nav-number">1.1.1.</span> <span class="nav-text">第二步</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#后端Java实现-websocket就不解释啦，如果不懂可以去看我的另一个项目"><span class="nav-number">2.</span> <span class="nav-text">后端Java实现(websocket就不解释啦，如果不懂可以去看我的另一个项目)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一步-1"><span class="nav-number">2.0.1.</span> <span class="nav-text">第一步</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二步-1"><span class="nav-number">2.0.2.</span> <span class="nav-text">第二步</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -872,6 +753,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
