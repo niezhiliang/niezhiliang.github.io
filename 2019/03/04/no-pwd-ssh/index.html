@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="苏雨丶">
 <meta property="og:description" content="作为一个后端开发人员跟服务器打交道是必不可少的，说到打交道，第一步就是跟服务器建立连接嘛。通常的做法就是ssh root@xxx.xxx.xxx.xxx   然后就输入密码就连接成功啦。一次两次这样跟服务器连接还好，要是经常连接，那就有点烦啦。都说人都喜欢偷懒，说到偷懒未必不是一个良好的品质。只有懒人才会想出各种无厘头的解决方式。这些方式往往事半功倍的解决问题。同样这里的SSH不用密码登录服务器也">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-03T08:18:11.000Z">
+<meta property="og:updated_time" content="2019-04-03T08:22:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="配置SSH免密登录">
 <meta name="twitter:description" content="作为一个后端开发人员跟服务器打交道是必不可少的，说到打交道，第一步就是跟服务器建立连接嘛。通常的做法就是ssh root@xxx.xxx.xxx.xxx   然后就输入密码就连接成功啦。一次两次这样跟服务器连接还好，要是经常连接，那就有点烦啦。都说人都喜欢偷懒，说到偷懒未必不是一个良好的品质。只有懒人才会想出各种无厘头的解决方式。这些方式往往事半功倍的解决问题。同样这里的SSH不用密码登录服务器也">
@@ -371,9 +371,9 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">打开服务器的 /etc/ssh/sshd_config 这个文件，取消注释。</span><br><span class="line"></span><br><span class="line"><span class="comment">#AuthorizedKeysFile .ssh/authorized_keys</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>重启服务器的ssh服务。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#RHEL/CentOS系统</span></span><br><span class="line"></span><br><span class="line">service sshd restart</span><br><span class="line"></span><br><span class="line"><span class="comment">#ubuntu系统</span></span><br><span class="line"></span><br><span class="line">service ssh restart</span><br><span class="line"></span><br><span class="line"><span class="comment">#debian系统</span></span><br><span class="line"></span><br><span class="line">/etc/init.d/ssh restart</span><br></pre></td></tr></table></figure></li>
+<li>重启服务器的ssh服务</li>
 </ul>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#RHEL/CentOS系统</span></span><br><span class="line"></span><br><span class="line">service sshd restart</span><br><span class="line"></span><br><span class="line"><span class="comment">#ubuntu系统</span></span><br><span class="line"></span><br><span class="line">service ssh restart</span><br><span class="line"></span><br><span class="line"><span class="comment">#debian系统</span></span><br><span class="line"></span><br><span class="line">/etc/init.d/ssh restart</span><br></pre></td></tr></table></figure>
       
     </div>
     
