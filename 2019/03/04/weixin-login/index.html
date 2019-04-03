@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="苏雨丶">
 <meta property="og:description" content="前端实现 这里说一下前后端的思路，页面加载时声明一个变量state=’时间戳+6位随机数’, 前端路径生成二维码，其中有个state参数需要我们传递，这个参数你传什么，微信回调的时候就会给你返回什么。我们用之前生成那个state，当用户点击微信登录的按钮，我们就通过以state值为key和后端进行websocket连接，同时弹出二维码页面。state对前端来说就相当于一个令牌，告诉后端是谁在使用微">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-03T08:38:53.000Z">
+<meta property="og:updated_time" content="2019-04-03T09:20:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="微信第三方登录前后端分离实现思路">
 <meta name="twitter:description" content="前端实现 这里说一下前后端的思路，页面加载时声明一个变量state=’时间戳+6位随机数’, 前端路径生成二维码，其中有个state参数需要我们传递，这个参数你传什么，微信回调的时候就会给你返回什么。我们用之前生成那个state，当用户点击微信登录的按钮，我们就通过以state值为key和后端进行websocket连接，同时弹出二维码页面。state对前端来说就相当于一个令牌，告诉后端是谁在使用微">
@@ -366,6 +366,7 @@
         <h3 id="前端实现"><a href="#前端实现" class="headerlink" title="前端实现"></a>前端实现</h3><blockquote>
 <p>这里说一下前后端的思路，页面加载时声明一个变量<code>state</code>=’时间戳+6位随机数’, 前端路径生成二维码，<br>其中有个<code>state</code>参数需要我们传递，这个参数你传什么，微信回调的时候就会给你返回什么。<br>我们用之前生成那个state，当用户点击微信登录的按钮，我们就通过以state值为key和后端进行websocket连接，同时弹出二维码页面。<br>state对前端来说就相当于一个令牌，告诉后端是谁在使用微信登录。目的在于，当后台收到回调的时候，能准确的把数据返回当前扫码的用户，<br>后台在微信回调的时候能拿到<code>code</code>的值和<code>state</code>的值，通过<code>code</code>去拿<code>access_token</code>和<code>openid</code> ，<br>通过这两个值去请求微信用户最新信息，<br>后端定义好返回的状态值代表啥，无非两种状态码：1.已经绑定:取出<code>user</code>信息，<br>通过websocket返回给前端，2.没绑定:返回微信账户的openid和头像昵称。<br>前端收到后端发送的websocket信息，判断微信绑定状态，如果绑定路由跳转到登录完成页面，如果未绑定，跳转到绑定或注册页面。</p>
 </blockquote>
+<a id="more"></a>
 <h5 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h5><p>前端先设置好生成二维码的路径，<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.url =</span><br><span class="line">      <span class="string">"https://open.weixin.qq.com/connect/qrconnect?appid="</span> +</span><br><span class="line">      <span class="keyword">this</span>.appid +</span><br><span class="line">      <span class="string">"&amp;redirect_uri="</span> +</span><br><span class="line">      <span class="keyword">this</span>.redirect_uri +</span><br><span class="line">      <span class="string">"&amp;response_type=code&amp;scope=snsapi_login&amp;state="</span> +</span><br><span class="line">      <span class="keyword">this</span>.state +</span><br><span class="line">      <span class="string">"#wechat_redirect"</span>;</span><br></pre></td></tr></table></figure></p>
 <h4 id="参数解释（这里直解释需要修改的参数）"><a href="#参数解释（这里直解释需要修改的参数）" class="headerlink" title="参数解释（这里直解释需要修改的参数）"></a>参数解释（这里直解释需要修改的参数）</h4><table>
 <thead>
