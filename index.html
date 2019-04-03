@@ -252,6 +252,184 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://niezhiliang.com/2019/03/04/no-pwd-ssh/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="niezhiliang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/33079130?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="苏雨丶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/04/no-pwd-ssh/" itemprop="url">配置SSH免密登录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-04T15:47:57+08:00">
+                2019-03-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/04/no-pwd-ssh/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/03/04/no-pwd-ssh/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>作为一个后端开发人员跟服务器打交道是必不可少的，说到打交道，第一步就是跟服务器建立连接嘛。通常的做法就是ssh <a href="mailto:root@xxx.xxx.xxx.xxx" target="_blank" rel="noopener">root@xxx.xxx.xxx.xxx</a>   然后就输入密码就连接成功啦。<br>一次两次这样跟服务器连接还好，要是经常连接，那就有点烦啦。都说人都喜欢偷懒，说到偷懒未必不是一个良好的品质。只有懒人才会想出各种无厘头的解决方式。这些方式往往事半功倍<br>的解决问题。同样这里的<code>SSH</code>不用密码登录服务器也是一种偷懒的方式。</p>
+<h2 id="SSH免密登录"><a href="#SSH免密登录" class="headerlink" title="SSH免密登录"></a>SSH免密登录</h2><h3 id="1-生成密钥对"><a href="#1-生成密钥对" class="headerlink" title="1.生成密钥对"></a>1.生成密钥对</h3><p>我这边系统是Mac的，打开终端输入命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
+<p>输入完代码后，会提示你输入密码啥的，既然是免密我们就不设置密码 一直按回车就好，运行结束以后， 默认在 ~/.ssh目录生成两个文件： id_rsa ：私钥 id_rsa.pub ：公钥</p>
+<h3 id="2-本地机器和服务器操作"><a href="#2-本地机器和服务器操作" class="headerlink" title="2.本地机器和服务器操作"></a>2.本地机器和服务器操作</h3><ul>
+<li>本地机器</li>
+</ul>
+<p>切换到生成的公私钥目录下 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将公钥写入到本地ssh的认证文件里面</span></span><br><span class="line">cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys  </span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span>  ~/.ssh</span><br><span class="line"><span class="comment">#将公私传到服务器根目录，也可以用工具将该文件传到服务器</span></span><br><span class="line">scp id_rsa.pub root@<span class="variable">$&#123;服务器ip&#125;</span>:~</span><br></pre></td></tr></table></figure>
+<ul>
+<li>服务器</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+<p>退出服务器再试试，看下是不是不需要输入密码就能直接进入系统了</p>
+<h3 id="常见问题及解决方案"><a href="#常见问题及解决方案" class="headerlink" title="常见问题及解决方案"></a>常见问题及解决方案</h3><ul>
+<li>生成密钥并上传至远程主机后，任然不可用</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">打开服务器的 /etc/ssh/sshd_config 这个文件，取消注释。</span><br><span class="line"></span><br><span class="line"><span class="comment">#AuthorizedKeysFile .ssh/authorized_keys</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>重启服务器的ssh服务。</li>
+</ul>
+<p>#RHEL/CentOS系统</p>
+<p>service sshd restart</p>
+<p>#ubuntu系统</p>
+<p>service ssh restart</p>
+<p>#debian系统</p>
+<p>/etc/init.d/ssh restart</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://niezhiliang.com/2017/05/26/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -447,7 +625,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -458,7 +636,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -469,7 +647,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
