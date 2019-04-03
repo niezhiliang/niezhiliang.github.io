@@ -524,9 +524,6 @@
       
         
           <p>作为一个后端开发人员跟服务器打交道是必不可少的，说到打交道，第一步就是跟服务器建立连接嘛。通常的做法就是ssh <a href="mailto:root@xxx.xxx.xxx.xxx" target="_blank" rel="noopener">root@xxx.xxx.xxx.xxx</a>   然后就输入密码就连接成功啦。<br>一次两次这样跟服务器连接还好，要是经常连接，那就有点烦啦。都说人都喜欢偷懒，说到偷懒未必不是一个良好的品质。只有懒人才会想出各种无厘头的解决方式。这些方式往往事半功倍<br>的解决问题。同样这里的<code>SSH</code>不用密码登录服务器也是一种偷懒的方式。</p>
-<h2 id="SSH免密登录"><a href="#SSH免密登录" class="headerlink" title="SSH免密登录"></a>SSH免密登录</h2><h3 id="1-生成密钥对"><a href="#1-生成密钥对" class="headerlink" title="1.生成密钥对"></a>1.生成密钥对</h3><p>我这边系统是Mac的，打开终端输入命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
-<p>输入完代码后，会提示你输入密码啥的，既然是免密我们就不设置密码 一直按回车就好，运行结束以后， 默认在 ~/.ssh目录生成两个文件： id_rsa ：私钥 id_rsa.pub ：公钥</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/03/04/no-pwd-ssh/" rel="contents">
